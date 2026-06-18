@@ -22,6 +22,7 @@ class MailingFactory extends Factory
             'subject' => $this->faker->sentence(),
             'body' => $this->faker->paragraph(),
             'status' => $this->faker->randomElement(MailingStatus::cases()),
+            'email_from' => $this->faker->email(),
             'domain' => $this->faker->randomElement([
                 null,
                 [['date_conversion', '>', now()->subDays(7)->format('Y-m-d H:i:s')]],

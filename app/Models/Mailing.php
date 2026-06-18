@@ -5,6 +5,7 @@ namespace App\Models;
 use App\MailingStatus;
 use Database\Factories\MailingFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Mailing extends Model
 {
