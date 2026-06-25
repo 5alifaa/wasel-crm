@@ -2,6 +2,8 @@
 
 namespace App\Jobs;
 
+use App\Mail\ColdEmail;
+use App\MailingTraceStatus;
 use App\Models\Lead;
 use App\Models\Mailing;
 use App\Models\MailingTrace;
@@ -19,7 +21,7 @@ class SendEmail implements ShouldQueue
      */
     public function __construct(
         protected Mailing $mailing,
-        protected int     $recipientId)
+        protected int $recipientId)
     {
         //
     }
@@ -31,22 +33,26 @@ class SendEmail implements ShouldQueue
     {
         // Fetch recipient email from database using recipientId
         $recipient = Lead::find($this->recipientId);
-        if (!$recipient) {
+        if (! $recipient) {
             \Log::error("Recipient with ID {$this->recipientId} not found.");
             throw new \Exception("Recipient with ID {$this->recipientId} not found.");
+
             return;
         }
-        // Create Mailing Trace
-        $trace = MailingTrace::create([
+        // Idempotent trace lookup — retry-safe
+        $trace = MailingTrace::firstOrCreate([
             'mailing_id' => $this->mailing->id,
             'lead_id' => $this->recipientId,
         ]);
-        // Send email using Laravel's Mail facade
-        Mail::to($recipient->email)->send(new \App\Mail\ColdEmail());
 
-        // Update Mailing Trace status to SENT
+        if ($trace->status === MailingTraceStatus::SENT) {
+            return;
+        }
+
+        Mail::to($recipient->email)->send(new ColdEmail($this->mailing));
+
         $trace->update([
-            'status' => \App\MailingTraceStatus::SENT,
+            'status' => MailingTraceStatus::SENT,
             'sent_at' => now(),
         ]);
 
@@ -55,7 +61,7 @@ class SendEmail implements ShouldQueue
     public function fail($exception = null): void
     {
         // Log the exception or handle it as needed
-        \Log::error('SendEmail job failed: ' . $exception->getMessage());
+        \Log::error('SendEmail job failed: '.$exception->getMessage());
 
         // Update Mailing Trace status to ERROR
         $trace = MailingTrace::where('mailing_id', $this->mailing->id)
@@ -63,7 +69,7 @@ class SendEmail implements ShouldQueue
             ->first();
 
         $trace?->update([
-            'status' => \App\MailingTraceStatus::ERROR,
+            'status' => MailingTraceStatus::ERROR,
             'error_at' => now(),
         ]);
 

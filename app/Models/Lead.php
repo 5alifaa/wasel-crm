@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\LeadSource;
 use App\LeadStatus;
+use Database\Factories\LeadFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,7 +19,7 @@ class Lead extends Model
         'status' => LeadStatus::NEW,
     ];
 
-    /** @use HasFactory<\Database\Factories\LeadFactory> */
+    /** @use HasFactory<LeadFactory> */
     use HasFactory;
 
     public function mailings()

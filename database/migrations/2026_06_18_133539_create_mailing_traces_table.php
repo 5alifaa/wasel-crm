@@ -1,10 +1,14 @@
 <?php
 
+use App\MailingTraceStatus;
+use App\Models\Lead;
+use App\Models\Mailing;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -13,10 +17,10 @@ return new class extends Migration {
         Schema::create('mailing_traces', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignIdFor(\App\Models\Mailing::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(\App\Models\Lead::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Mailing::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Lead::class)->constrained()->cascadeOnDelete();
 
-            $table->string('status')->default(\App\MailingTraceStatus::PENDING->value);
+            $table->string('status')->default(MailingTraceStatus::PENDING->value);
             $table->dateTime('sent_at')->nullable();
             $table->dateTime('error_at')->nullable();
 

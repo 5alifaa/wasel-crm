@@ -1,5 +1,7 @@
 <?php
 
+use App\LeadSource;
+use App\LeadStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,8 +21,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('country');
             $table->date('birth_date');
-            $table->string('status')->default(\App\LeadStatus::NEW->value);
-            $table->string('source')->default(\App\LeadSource::OTHER->value);
+            $table->string('status')->default(LeadStatus::NEW->value);
+            $table->string('source')->default(LeadSource::OTHER->value);
 
             $table->timestamps();
         });

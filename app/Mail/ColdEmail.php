@@ -2,8 +2,10 @@
 
 namespace App\Mail;
 
+use App\Models\Mailing;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -16,8 +18,9 @@ class ColdEmail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
-    {
+    public function __construct(
+        public Mailing $mailing,
+    ) {
         //
     }
 
@@ -27,7 +30,8 @@ class ColdEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Cold Email',
+            from: new Address($this->mailing->email_from),
+            subject: $this->mailing->subject,
         );
     }
 
@@ -38,6 +42,9 @@ class ColdEmail extends Mailable
     {
         return new Content(
             view: 'mail.cold-email',
+            with: [
+                'body' => $this->mailing->body,
+            ],
         );
     }
 
