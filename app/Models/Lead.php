@@ -20,4 +20,9 @@ class Lead extends Model
 
     /** @use HasFactory<\Database\Factories\LeadFactory> */
     use HasFactory;
+
+    public function mailings()
+    {
+        return $this->hasMany(MailingTrace::class);
+    }
 }

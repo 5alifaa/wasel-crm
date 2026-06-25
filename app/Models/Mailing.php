@@ -13,7 +13,7 @@ class Mailing extends Model
     use HasFactory;
 
     protected $casts = [
-        'domain' => 'json',
+        'recipients' => 'json',
     ];
 
     protected $fillable = [
@@ -21,10 +21,15 @@ class Mailing extends Model
         'body',
         'status',
         'email_from',
-        'domain',
+        'recipients',
     ];
 
     protected $attributes = [
         'status' => MailingStatus::DRAFT,
     ];
+
+    public function traces()
+    {
+        return $this->hasMany(MailingTrace::class);
+    }
 }

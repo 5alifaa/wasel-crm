@@ -17,7 +17,9 @@ return new class extends Migration {
             $table->text('body');
             $table->string('status')->default(\App\MailingStatus::DRAFT);
             $table->string('email_from');
-            $table->json('domain')->nullable();
+            // recipient array : this should be a JSON array of recipient emails
+            $table->json('recipients');
+
             $table->timestamps();
         });
     }

@@ -27,6 +27,10 @@ class MailingTrace extends Model
         'error_at' => 'datetime',
     ];
 
+    protected $attributes = [
+        'status' => MailingTraceStatus::PENDING,
+    ];
+
     public function mailing(): BelongsTo
     {
         return $this->belongsTo(Mailing::class);
