@@ -15,11 +15,11 @@ return new class extends Migration
         Schema::create('mailings', function (Blueprint $table) {
             $table->id();
 
-            $table->char('subject');
+            $table->string('subject', 255);
             $table->text('body');
             $table->string('status')->default(MailingStatus::DRAFT);
             $table->string('email_from');
-            // recipient array : this should be a JSON array of recipient emails
+            // JSON array of recipient Lead IDs
             $table->json('recipients');
 
             $table->timestamps();

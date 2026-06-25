@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Bus;
 
 class SendMailing
 {
-    public function handle(Mailing $mailing)
+    public function handle(Mailing $mailing): void
     {
         $jobs = [];
 
