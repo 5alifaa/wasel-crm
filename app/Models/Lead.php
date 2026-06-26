@@ -26,4 +26,10 @@ class Lead extends Model
     {
         return $this->hasMany(MailingTrace::class);
     }
+
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, 'lead_groups')
+            ->withTimestamps();
+    }
 }

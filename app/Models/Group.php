@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
+class Group extends Model
+{
+    /** @use HasFactory<\Database\Factories\GroupFactory> */
+    use HasFactory;
+
+    public function leads(): BelongsToMany
+    {
+        return $this->belongsToMany(Lead::class, 'lead_groups');
+    }
+}
