@@ -11,6 +11,10 @@ class Group extends Model
     /** @use HasFactory<\Database\Factories\GroupFactory> */
     use HasFactory;
 
+    protected $fillable = [
+        'name'
+    ];
+
     public function leads(): BelongsToMany
     {
         return $this->belongsToMany(Lead::class, 'lead_groups');
