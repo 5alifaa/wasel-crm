@@ -9,4 +9,9 @@ class LeadGroup extends Model
 {
     /** @use HasFactory<\Database\Factories\LeadGroupFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'lead_id',
+        'group_id'
+    ];
 }
