@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Mailings\Schemas;
 
 use App\MailingStatus;
+use App\Models\Lead;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -26,9 +27,16 @@ class MailingForm
                 TextInput::make('email_from')
                     ->email()
                     ->required(),
-                Textarea::make('recipients')
+                Select::make('recipients')
+                    ->options(Lead::pluck('name', 'id'))
+                    ->multiple()
                     ->required()
-                    ->columnSpanFull(),
+                    ->searchable()
+                    ->getSearchResultsUsing(function (string $search) {
+                        return Lead::where('name', 'like', "%{$search}%")
+                            ->orWhere('email', 'like', "%{$search}%")
+                            ->pluck('name', 'id');
+                    })
             ]);
     }
 }

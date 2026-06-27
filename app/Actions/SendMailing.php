@@ -8,8 +8,10 @@ use Illuminate\Support\Facades\Bus;
 
 class SendMailing
 {
-    public function handle(Mailing $mailing): void
+    public function handle(int $mailingId): void
     {
+        $mailing = Mailing::findOrFail($mailingId);
+
         $jobs = [];
 
         foreach ($mailing->recipients as $recipientId) {
@@ -17,6 +19,6 @@ class SendMailing
         }
 
         // Dispatch the jobs in batches
-        Bus::batch($jobs)->dispatch();
+        Bus::batch($jobs)->dispatch()->allowsFailures();
     }
 }

@@ -21,7 +21,7 @@ class SendEmail implements ShouldQueue
      */
     public function __construct(
         protected Mailing $mailing,
-        protected int $recipientId)
+        protected int     $recipientId)
     {
         //
     }
@@ -33,17 +33,21 @@ class SendEmail implements ShouldQueue
     {
         // Fetch recipient email from database using recipientId
         $recipient = Lead::find($this->recipientId);
-        if (! $recipient) {
+        if (!$recipient) {
             \Log::error("Recipient with ID {$this->recipientId} not found.");
             throw new \Exception("Recipient with ID {$this->recipientId} not found.");
-
-            return;
         }
+
         // Idempotent trace lookup — retry-safe
         $trace = MailingTrace::firstOrCreate([
             'mailing_id' => $this->mailing->id,
             'lead_id' => $this->recipientId,
         ]);
+
+//        if ($recipient->name == 'Jon Parker') {
+//            $this->fail(new \Exception("Recipient with ID {$this->recipientId} is Jon Parker, skipping email."));
+//            return;
+//        }
 
         if ($trace->status === MailingTraceStatus::SENT) {
             return;
@@ -61,7 +65,9 @@ class SendEmail implements ShouldQueue
     public function fail($exception = null): void
     {
         // Log the exception or handle it as needed
-        \Log::error('SendEmail job failed: '.$exception->getMessage());
+        \Log::error('SendEmail job failed: ' . $exception->getMessage());
+
+        \Log::error('id: ' . $this->recipientId);
 
         // Update Mailing Trace status to ERROR
         $trace = MailingTrace::where('mailing_id', $this->mailing->id)

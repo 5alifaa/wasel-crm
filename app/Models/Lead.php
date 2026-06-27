@@ -19,6 +19,16 @@ class Lead extends Model
         'status' => LeadStatus::NEW,
     ];
 
+    protected $fillable = [
+        'name',
+        'email',
+        'country',
+        'birth_date',
+        'phone',
+        'source',
+        'status',
+    ];
+
     /** @use HasFactory<LeadFactory> */
     use HasFactory;
 

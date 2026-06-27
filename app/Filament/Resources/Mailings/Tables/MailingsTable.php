@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Mailings\Tables;
 
+use App\Filament\Resources\Mailings\MailingResource;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -35,6 +36,7 @@ class MailingsTable
                 //
             ])
             ->recordActions([
+                MailingResource::getSendMailingAction(),
                 ViewAction::make(),
                 EditAction::make(),
             ])

@@ -13,7 +13,7 @@ class Mailing extends Model
     use HasFactory;
 
     protected $casts = [
-        'recipients' => 'json',
+        'recipients' => 'array',
     ];
 
     protected $fillable = [
