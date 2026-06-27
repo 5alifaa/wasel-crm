@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\MailingStatus;
-use App\Models\Lead;
 use App\Models\Mailing;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -26,7 +25,7 @@ class MailingFactory extends Factory
             'status' => $this->faker->randomElement(MailingStatus::cases()),
             'email_from' => $this->faker->email(),
             // 1000 recipients
-            'recipients' => $this->faker->randomElements([Lead::factory()->create()->id, Lead::factory()->create()->id, Lead::factory()->create()->id], 3),
+            //            'recipients' => $this->faker->randomElements([Lead::factory()->create()->id, Lead::factory()->create()->id, Lead::factory()->create()->id], 3),
         ];
     }
 }

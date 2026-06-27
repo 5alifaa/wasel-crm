@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\MailingTraces;
 
 use App\Filament\Resources\MailingTraces\Pages\ManageMailingTraces;
@@ -17,6 +19,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Override;
 
 class MailingTraceResource extends Resource
 {
@@ -26,6 +29,7 @@ class MailingTraceResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'Mailing Traces';
 
+    #[Override]
     public static function form(Schema $schema): Schema
     {
         return $schema
@@ -45,6 +49,7 @@ class MailingTraceResource extends Resource
             ]);
     }
 
+    #[Override]
     public static function infolist(Schema $schema): Schema
     {
         return $schema
@@ -70,6 +75,7 @@ class MailingTraceResource extends Resource
             ]);
     }
 
+    #[Override]
     public static function table(Table $table): Table
     {
         return $table
@@ -102,8 +108,8 @@ class MailingTraceResource extends Resource
             ])
             ->recordActions([
                 ViewAction::make(),
-//                EditAction::make(),
-//                DeleteAction::make(),
+                //                EditAction::make(),
+                //                DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
@@ -112,6 +118,7 @@ class MailingTraceResource extends Resource
             ]);
     }
 
+    #[Override]
     public static function getPages(): array
     {
         return [

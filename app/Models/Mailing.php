@@ -1,13 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\MailingStatus;
 use Database\Factories\MailingFactory;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+#[Fillable([
+    'subject',
+    'body',
+    'status',
+    'email_from',
+    'recipients',
+])]
 class Mailing extends Model
 {
     /** @use HasFactory<MailingFactory> */
@@ -15,14 +25,6 @@ class Mailing extends Model
 
     protected $casts = [
         'recipients' => 'array',
-    ];
-
-    protected $fillable = [
-        'subject',
-        'body',
-        'status',
-        'email_from',
-        'recipients',
     ];
 
     protected $attributes = [
@@ -37,7 +39,7 @@ class Mailing extends Model
     public function leads(): BelongsToMany
     {
         return $this->belongsToMany(Lead::class, 'mailing_traces')
-//            ->withPivot('status', 'sent_at')
+            ->withPivot('status', 'sent_at')
             ->withTimestamps();
     }
 }

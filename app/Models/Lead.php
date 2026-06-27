@@ -1,15 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\LeadSource;
 use App\LeadStatus;
 use Database\Factories\LeadFactory;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[Fillable([
+    'name',
+    'email',
+    'country',
+    'birth_date',
+    'phone',
+    'source',
+    'status',
+])]
 class Lead extends Model
 {
     protected $casts = [
@@ -19,16 +31,6 @@ class Lead extends Model
 
     protected $attributes = [
         'status' => LeadStatus::NEW,
-    ];
-
-    protected $fillable = [
-        'name',
-        'email',
-        'country',
-        'birth_date',
-        'phone',
-        'source',
-        'status',
     ];
 
     /** @use HasFactory<LeadFactory> */
@@ -46,10 +48,9 @@ class Lead extends Model
         return $this->belongsToMany(Group::class, 'lead_groups')
             ->withTimestamps();
     }
-    
+
     public function traces(): HasMany
     {
         return $this->hasMany(MailingTrace::class);
     }
-
 }

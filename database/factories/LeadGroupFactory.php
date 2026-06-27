@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Group;
+use App\Models\Lead;
 use App\Models\LeadGroup;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,8 +20,8 @@ class LeadGroupFactory extends Factory
     public function definition(): array
     {
         return [
-            'lead_id' => \App\Models\Lead::factory(),
-            'group_id' => \App\Models\Group::factory(),
+            'lead_id' => Lead::factory(),
+            'group_id' => Group::factory(),
         ];
     }
 }

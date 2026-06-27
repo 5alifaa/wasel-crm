@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\Mailings\Schemas;
 
 use App\MailingStatus;
@@ -20,7 +22,7 @@ class MailingForm
                     ->required()
                     ->columnSpanFull(),
                 Select::make('status')
-                    ->options(fn() => collect(MailingStatus::cases())->mapWithKeys(fn($status) => [$status->value => $status->label()]))
+                    ->options(fn () => collect(MailingStatus::cases())->mapWithKeys(fn ($status) => [$status->value => $status->label()]))
                     ->required()
                     ->disablePlaceholderSelection()
                     ->default(MailingStatus::DRAFT),

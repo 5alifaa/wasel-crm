@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\Leads\Schemas;
 
 use Filament\Infolists\Components\TextEntry;
@@ -28,12 +30,12 @@ class LeadInfolist
                 TextEntry::make('updated_at')
                     ->dateTime()
                     ->placeholder('-'),
-//                Select::make('groups')
-//                    ->relationship('groups', 'name')
-//                    ->badge()
+                //                Select::make('groups')
+                //                    ->relationship('groups', 'name')
+                //                    ->badge()
                 TextEntry::make('groups.name')
                     ->label('Groups')
-                    ->badge()
+                    ->badge(),
             ]);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\Leads\Schemas;
 
 use App\LeadSource;
@@ -40,7 +42,7 @@ class LeadForm
                     ->relationship('groups', 'name')
                     ->multiple()
                     ->preload()
-                    ->searchable()
+                    ->searchable(),
             ]);
     }
 }
