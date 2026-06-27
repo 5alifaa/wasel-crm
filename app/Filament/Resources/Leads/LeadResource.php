@@ -25,7 +25,7 @@ class LeadResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'Leads';
+    protected static ?string $recordTitleAttribute = 'name';
 
     #[Override]
     public static function form(Schema $schema): Schema
