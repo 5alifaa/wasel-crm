@@ -4,9 +4,9 @@ namespace App\Filament\Resources\Leads\Pages;
 
 use App\Filament\Resources\Leads\LeadResource;
 use Filament\Actions\CreateAction;
-use Filament\Resources\Pages\ManageRecords;
+use Filament\Resources\Pages\ListRecords;
 
-class ManageLeads extends ManageRecords
+class ListLeads extends ListRecords
 {
     protected static string $resource = LeadResource::class;
 
