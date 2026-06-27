@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Mailings\Tables;
 
-use App\Filament\Resources\Mailings\MailingResource;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -19,7 +18,6 @@ class MailingsTable
                 TextColumn::make('subject')
                     ->searchable(),
                 TextColumn::make('status')
-                    ->badge()
                     ->searchable(),
                 TextColumn::make('email_from')
                     ->searchable(),
@@ -36,7 +34,6 @@ class MailingsTable
                 //
             ])
             ->recordActions([
-                MailingResource::getSendMailingAction(),
                 ViewAction::make(),
                 EditAction::make(),
             ])

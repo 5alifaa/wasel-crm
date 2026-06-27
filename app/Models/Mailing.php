@@ -6,6 +6,7 @@ use App\MailingStatus;
 use Database\Factories\MailingFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Mailing extends Model
 {
@@ -31,5 +32,12 @@ class Mailing extends Model
     public function traces()
     {
         return $this->hasMany(MailingTrace::class);
+    }
+
+    public function leads(): BelongsToMany
+    {
+        return $this->belongsToMany(Lead::class, 'mailing_traces')
+//            ->withPivot('status', 'sent_at')
+            ->withTimestamps();
     }
 }

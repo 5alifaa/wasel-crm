@@ -7,6 +7,8 @@ use App\LeadStatus;
 use Database\Factories\LeadFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Lead extends Model
 {
@@ -34,12 +36,20 @@ class Lead extends Model
 
     public function mailings()
     {
-        return $this->hasMany(MailingTrace::class);
+        return $this->belongsToMany(Mailing::class, 'mailing_traces')
+//            ->withPivot('status', 'sent_at')
+            ->withTimestamps();
     }
 
-    public function groups()
+    public function groups(): BelongsToMany
     {
         return $this->belongsToMany(Group::class, 'lead_groups')
             ->withTimestamps();
     }
+    
+    public function traces(): HasMany
+    {
+        return $this->hasMany(MailingTrace::class);
+    }
+
 }
