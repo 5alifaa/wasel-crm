@@ -14,7 +14,8 @@ class MailingInfolist
                 TextEntry::make('subject'),
                 TextEntry::make('body')
                     ->columnSpanFull(),
-                TextEntry::make('status'),
+                TextEntry::make('status')
+                    ->badge(),
                 TextEntry::make('email_from'),
                 TextEntry::make('recipients')
                     ->columnSpanFull(),

@@ -18,6 +18,7 @@ class MailingsTable
                 TextColumn::make('subject')
                     ->searchable(),
                 TextColumn::make('status')
+                    ->badge()
                     ->searchable(),
                 TextColumn::make('email_from')
                     ->searchable(),

@@ -2,8 +2,10 @@
 
 namespace App\Filament\Resources\Mailings\Schemas;
 
-use Filament\Forms\Components\TextInput;
+use App\MailingStatus;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
 class MailingForm
@@ -17,9 +19,10 @@ class MailingForm
                 Textarea::make('body')
                     ->required()
                     ->columnSpanFull(),
-                TextInput::make('status')
+                Select::make('status')
+                    ->options(MailingStatus::class)
                     ->required()
-                    ->default('draft'),
+                    ->default(MailingStatus::DRAFT),
                 TextInput::make('email_from')
                     ->email()
                     ->required(),
