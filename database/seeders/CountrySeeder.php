@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Country;
 use Illuminate\Database\Seeder;
 
 class CountrySeeder extends Seeder
@@ -29,7 +30,7 @@ class CountrySeeder extends Seeder
         ];
 
         foreach ($countries as $country) {
-            \App\Models\Country::create($country);
+            Country::create($country);
         }
     }
 }

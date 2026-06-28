@@ -2,12 +2,12 @@
 
 use App\LeadSource;
 use App\LeadStatus;
+use App\Models\Country;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone')->unique();
             $table->string('email')->unique();
-            $table->string('country');
+            $table->foreignIdFor(Country::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->date('birth_date');
             $table->string('status')->default(LeadStatus::NEW->value);
             $table->string('source')->default(LeadSource::OTHER->value);

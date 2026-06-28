@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\LeadSource;
 use App\LeadStatus;
+use App\Models\Country;
 use App\Models\Lead;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,11 +20,12 @@ class LeadFactory extends Factory
      */
     public function definition(): array
     {
+        $countryCount = Country::count();
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->unique()->phoneNumber(),
-            'country' => $this->faker->country(),
+            'country_id' => $this->faker->numberBetween(1, $countryCount),
             'birth_date' => $this->faker->date(),
             'source' => $this->faker->randomElement(LeadSource::cases()),
             'status' => $this->faker->randomElement(LeadStatus::cases()),

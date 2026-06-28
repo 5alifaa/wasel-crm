@@ -22,9 +22,12 @@ class MailingTraceFactory extends Factory
     {
         $status = $this->faker->randomElement(MailingTraceStatus::cases());
 
+        $mailingCount = Mailing::count();
+        $leadCount = Lead::count();
+
         return [
-            'mailing_id' => Mailing::factory(),
-            'lead_id' => Lead::factory(),
+            'mailing_id' => $mailingCount > 0 ? Mailing::inRandomOrder()->first()->id : Mailing::factory(),
+            'lead_id' => $leadCount > 0 ? Lead::inRandomOrder()->first()->id : Lead::factory(),
             'status' => $status->value,
             'sent_at' => $status === MailingTraceStatus::SENT ? $this->faker->dateTime() : null,
             'error_at' => $status === MailingTraceStatus::ERROR ? $this->faker->dateTime() : null,

@@ -19,9 +19,11 @@ class LeadGroupFactory extends Factory
      */
     public function definition(): array
     {
+        $leadsCount = Lead::count();
+        $groupsCount = Group::count();
         return [
-            'lead_id' => Lead::factory(),
-            'group_id' => Group::factory(),
+            'lead_id' => $leadsCount > 0 ? $this->faker->numberBetween(1, $leadsCount) : Lead::factory(),
+            'group_id' => $groupsCount > 0 ? $this->faker->numberBetween(1, $groupsCount) : Group::factory(),
         ];
     }
 }
