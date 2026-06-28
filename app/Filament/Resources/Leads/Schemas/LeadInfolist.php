@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Filament\Resources\Leads\Schemas;
 
 use Filament\Infolists\Components\TextEntry;
@@ -17,7 +15,8 @@ class LeadInfolist
                 TextEntry::make('phone'),
                 TextEntry::make('email')
                     ->label('Email address'),
-                TextEntry::make('country'),
+                TextEntry::make('country.name')
+                    ->label('Country'),
                 TextEntry::make('birth_date')
                     ->date(),
                 TextEntry::make('status')

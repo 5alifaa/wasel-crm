@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Filament\Resources\Leads\Schemas;
 
 use App\LeadSource;
@@ -26,10 +24,21 @@ class LeadForm
                     ->label('Email address')
                     ->email()
                     ->required(),
-                TextInput::make('country')
-                    ->required(),
+                Select::make('country_id')
+                    ->relationship('country', 'name')
+                    ->required()
+                    ->preload()
+                    ->searchable([
+                        'name',
+                        'code',
+                    ]),
                 DatePicker::make('birth_date')
                     ->required(),
+                Select::make('groups')
+                    ->relationship('groups', 'name')
+                    ->multiple()
+                    ->preload()
+                    ->searchable(),
                 Select::make('status')
                     ->options(LeadStatus::class)
                     ->default('new')
@@ -38,11 +47,6 @@ class LeadForm
                     ->options(LeadSource::class)
                     ->default('other')
                     ->required(),
-                Select::make('groups')
-                    ->relationship('groups', 'name')
-                    ->multiple()
-                    ->preload()
-                    ->searchable(),
             ]);
     }
 }

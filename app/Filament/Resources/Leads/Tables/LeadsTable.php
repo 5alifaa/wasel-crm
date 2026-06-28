@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Filament\Resources\Leads\Tables;
 
 use Filament\Actions\BulkActionGroup;
@@ -24,7 +22,7 @@ class LeadsTable
                 TextColumn::make('email')
                     ->label('Email address')
                     ->searchable(),
-                TextColumn::make('country')
+                TextColumn::make('country.name')
                     ->searchable(),
                 TextColumn::make('birth_date')
                     ->date()
