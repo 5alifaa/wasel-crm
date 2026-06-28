@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Mailings\Tables;
 
+use App\MailingStatus;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -20,7 +21,9 @@ class MailingsTable
                 TextColumn::make('subject')
                     ->searchable(),
                 TextColumn::make('status')
-                    ->searchable(),
+                    ->searchable()
+                    ->badge()
+                    ->formatStateUsing(fn($state) => MailingStatus::from($state)->label()),
                 TextColumn::make('email_from')
                     ->searchable(),
                 TextColumn::make('created_at')

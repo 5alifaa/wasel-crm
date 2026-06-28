@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             GroupSeeder::class,
             LeadSeeder::class,
-            MailingSeeder::class
+//            MailingSeeder::class
         ]);
     }
 }

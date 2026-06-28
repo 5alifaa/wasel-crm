@@ -16,7 +16,9 @@ class MailingInfolist
                 TextEntry::make('subject'),
                 TextEntry::make('body')
                     ->columnSpanFull(),
-                TextEntry::make('status'),
+                TextEntry::make('status')
+                    ->badge()
+                    ->formatStateUsing(fn($state) => \App\MailingStatus::from($state)->label()),
                 TextEntry::make('email_from'),
                 TextEntry::make('created_at')
                     ->dateTime()

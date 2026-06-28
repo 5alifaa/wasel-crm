@@ -11,6 +11,8 @@ enum MailingStatus: string
     case SENDING = 'sending';
     case DONE = 'done';
 
+    case DONE_WITH_ERROR = 'done_with_error';
+
     public function label(): string
     {
         return match ($this) {
@@ -18,6 +20,7 @@ enum MailingStatus: string
             self::IN_QUEUE => 'In Queue',
             self::SENDING => 'Sending',
             self::DONE => 'Done',
+            self::DONE_WITH_ERROR => 'Done with Error',
         };
     }
 }

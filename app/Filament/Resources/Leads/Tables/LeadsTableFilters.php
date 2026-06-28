@@ -20,7 +20,9 @@ class LeadsTableFilters
             SelectFilter::make('groups')
                 ->relationship('groups', 'name')
                 ->preload()
-                ->searchable(),
+                ->searchable()
+                ->multiple()
+            ,
             // Birthdate filter
             Filter::make('birth_date')
                 ->schema([
