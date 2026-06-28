@@ -22,7 +22,13 @@ class LeadInfolist
                     ->date(),
                 TextEntry::make('status')
                     ->badge(),
+                TextEntry::make('birth_date')
+                    ->label('Age')
+                    ->since(),
                 TextEntry::make('source')
+                    ->badge(),
+                TextEntry::make('groups.name')
+                    ->label('Groups')
                     ->badge(),
                 TextEntry::make('created_at')
                     ->dateTime()
@@ -30,12 +36,6 @@ class LeadInfolist
                 TextEntry::make('updated_at')
                     ->dateTime()
                     ->placeholder('-'),
-                //                Select::make('groups')
-                //                    ->relationship('groups', 'name')
-                //                    ->badge()
-                TextEntry::make('groups.name')
-                    ->label('Groups')
-                    ->badge(),
             ]);
     }
 }
