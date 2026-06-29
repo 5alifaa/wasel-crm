@@ -57,7 +57,7 @@ class LeadsTableFilters
                     );
 
                 }),
-            // Day or Month
+            // Day
             Filter::make('birth_date_day')
                 ->schema([
                     TextInput::make('birth_date_day')

@@ -34,7 +34,6 @@ class MailingForm
                 Select::make('status')
                     ->options(fn() => collect(MailingStatus::cases())->mapWithKeys(fn($status) => [$status->value => $status->label()]))
                     ->required()
-                    ->disablePlaceholderSelection()
                     ->default(MailingStatus::DRAFT),
                 TextInput::make('email_from')
                     ->email()
