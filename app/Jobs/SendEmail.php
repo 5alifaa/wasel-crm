@@ -33,6 +33,9 @@ class SendEmail implements ShouldQueue
      */
     public function handle(): void
     {
+        // put the name and email of the lead in the body of the email
+        $this->mailing->body = str_replace(['{{name}}', '{{email}}'], [$this->trace->lead->name, $this->trace->lead->email], $this->mailing->body);
+
         Mail::to($this->trace->lead->email)->send(new ColdEmail($this->mailing));
 
         $this->trace->update([

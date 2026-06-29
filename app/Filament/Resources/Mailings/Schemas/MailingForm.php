@@ -6,9 +6,9 @@ namespace App\Filament\Resources\Mailings\Schemas;
 
 use App\Filament\Resources\Leads\Tables\LeadsTable;
 use App\MailingStatus;
+use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\ModalTableSelect;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -20,7 +20,15 @@ class MailingForm
             ->components([
                 TextInput::make('subject')
                     ->required(),
-                Textarea::make('body')
+                MarkdownEditor::make('body')
+                    ->toolbarButtons([
+                        ['bold', 'italic', 'strike', 'link'],
+                        ['heading'],
+                        ['blockquote', 'codeBlock', 'bulletList', 'orderedList'],
+                        ['table'],
+                        ['undo', 'redo'],
+                    ])
+                    ->hint('You can use {{name}} or {{email}} to personalize the email.')
                     ->required()
                     ->columnSpanFull(),
                 Select::make('status')

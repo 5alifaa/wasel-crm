@@ -15,7 +15,8 @@ class MailingInfolist
             ->components([
                 TextEntry::make('subject'),
                 TextEntry::make('body')
-                    ->columnSpanFull(),
+                    ->columnSpanFull()
+                    ->markdown(),
                 TextEntry::make('status')
                     ->badge()
                     ->formatStateUsing(fn($state) => \App\MailingStatus::from($state)->label()),

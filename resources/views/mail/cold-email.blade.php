@@ -1,3 +1,3 @@
 <div>
-    {!! $body !!}
+    {!! str($body)->markdown()->sanitizeHtml() !!}
 </div>
