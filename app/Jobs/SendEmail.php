@@ -47,7 +47,7 @@ class SendEmail implements ShouldQueue
 
     public function fail($exception = null): void
     {
-        Log::error('Failed to send email for trace ID: ' . $this->trace->id . '. Error: ' . $exception?->getMessage());
+        Log::error('failed to send email ' . $this->trace->id);
 
         $this->trace->update([
             'status' => MailingTraceStatus::ERROR,
